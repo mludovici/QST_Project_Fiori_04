@@ -15,7 +15,7 @@ sap.ui.define([
                 var oItem = oEvent.getSource();
                 var sPath= oItem.getBindingContext().getPath(); 
                 var sIndex = sPath.substr(sPath.lastIndexOf("/") + 1);
-                var oDetail = this.getView().byId("box");
+                var oDetail = this.getView().byId("detail");
                 oDetail.bindElement(sPath);
 
             }
