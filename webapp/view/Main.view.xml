@@ -1,7 +1,27 @@
 <mvc:View controllerName="qst4.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
-    </Page>
+    <SplitApp id="SplitApp">
+        <masterPages>
+                <Page id="master" title="{i18n>title}">
+                    <content>
+                        <List id="list" items="{/Products}">
+                            <items>
+                                <ActionListItem id="item1" text="{Name}: {Price}€"  press="onItemPressed">
+                                </ActionListItem>
+                            </items>
+                        </List>
+                    </content>
+                </Page>
+            </masterPages>
+            <detailPages>        
+                <Page id="detail" title="">
+                    <content>
+                        <VBox id="box">
+                            <Text text="{Name}"/>
+                        </VBox>
+                    </content>
+                </Page>  
+            </detailPages>
+        </SplitApp>
 </mvc:View>
