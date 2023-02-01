@@ -14,10 +14,10 @@ sap.ui.define([
                 var oFragment = sap.ui.xmlfragment(this.createId("detailFragment"), "qst4.view.ProductDetail", oFragController);
                 this.getView().byId("detail").insertContent(oFragment);
 
-                 var oFragController2 = sap.ui.controller("qst4.controller.ProductList");
+                var oFragController2 = sap.ui.controller("qst4.controller.ProductList");
                 oFragController2.init(this);
-                var oFragment2 = sap.ui.xmlfragment("qst4.view.ProductList", oFragController2);
+                var oFragment2 = sap.ui.xmlfragment(this.createId("masterFragment"), "qst4.view.ProductList", oFragController2);
                 this.getView().byId("master").insertContent(oFragment2);
             }
-         });
+        });
     });

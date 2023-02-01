@@ -37,6 +37,49 @@ sap.ui.define(
 
 
       },
+      onSelectionChange: function (oEvent) {
+        debugger;
+        var sItem = oEvent.getParameter("selectedItem");
+        var sPath = sItem.getBindingContext().getPath()
+
+        console.log(sPath);
+        // var sPath = oItem.getBindingContext().getPath();
+        // console.log("path:", sPath);
+        var oProductList = this._oParent.getView().byId("masterFragment--list");
+        var oSelectedCategory = oEvent.getParameter("selectedItem").getBindingContext().getPath() //Categories(0)
+        var oTemplate = new sap.m.ObjectAttribute({ text: "{/Name}" });
+        //oProductList.bindItems({ path: oSelectedCategory + '/Products', template: oTemplate });
+        var oModel = this._oParent.getOwnerComponent().getModel();
+
+        oModel.read(sPath + "/Products", {
+          success: function (oData) {
+            debugger
+            var sCategory = oData.Name;
+            console.log("oData category", sCategory);
+            var oFilter = new sap.ui.model.Filter(
+              "Category/Name",
+              sap.ui.model.FilterOperator.EQ,
+              sCategory
+            );
+            oProductList.getBinding("items").filter([oFilter]);
+          },
+          error: function (oError) {
+            console.log("Error:", oError);
+          }
+        });
+
+        debugger;
+        // oProductList.getParameter("items").bindElement({
+        //   path: oSelectedCategory + '/Products'
+        //   // parameters: {
+        //   //   expand: "/Products",
+        //   // }
+        // });
+
+        //oProductList.bindAggregation(oSelectedCategory, { expand: "Products" });
+
+      },
+
       onFilter: function (oEvent) {
         var oItem = oEvent.getSource();
         var sPath = oItem.getBindingContext().getPath();
@@ -44,35 +87,8 @@ sap.ui.define(
         // var sIndex = sPath.substr(sPath.lastIndexOf("/") + 1);
         //   var oDetail = this._oParent.getView().byId("detail");
         //   oDetail.bindElement(sPath);
-      },
-      onSelectionChange: function (oEvent) {
-        // var oITT = oEvent.getSelectedItem();
-        // console.log(oITT);
-
-        var sItem = oEvent.getParameter("selectedItem");
-        var sPath = sItem.getBindingContext().getPath()
-
-        console.log(sPath);
-        // var sPath = oItem.getBindingContext().getPath();
-        // console.log("path:", sPath);
-
-        var oList = this._oParent.getView().byId(this.createId("list"));
-        debugger;
-        // var pars = oEvent.getParameters("selectedItem");
-        // console.log(oItem);
-        // console.log(oItem.getKeys("items"));
-        // var item = oItem.getBinding("items");
-        // console.log("items:", item);
-        // var sPath= oItem.getBindingPath(); 
-        // console.log("sPath:", sPath);
-
-        // var oInput = this.getView().byId("input0");
-        // var oList = this.getView().byId("__table0");
-        // var oListValue = oInput.getValue();
-        // var oFilter = new sap.ui.model.Filter("oscYear", FilterOperator.GE, oListValue);
-        // var oBinding = oList.getBinding("items");
-        // oBinding.filter(oFilter);
       }
+
     });
   }
 );
