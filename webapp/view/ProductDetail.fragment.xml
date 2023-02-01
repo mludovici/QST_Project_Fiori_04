@@ -1,5 +1,5 @@
 <c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
-    <l:VerticalLayout>
+    <l:VerticalLayout id= "detailLayout">
         <l:content>
             <ObjectHeader
             title="{Name}"
@@ -11,13 +11,13 @@
                     text="{Description}"/>
                 <ObjectAttribute
                     title="Veröffentlicht am"
-                    text="{ReleaseDate}"/>
+                    text="{path: 'ReleaseDate', formatter: '.formatDate'}"/>
                 <ObjectAttribute
                     title="DiscontinuedDate"
-                    text="{path: 'DiscontinuedDate'}"/>
+                    text="{path: 'DiscontinuedDate', formatter: '.formatDate}"/>
                 <ObjectAttribute
                     title="Kategorie"
-                    text="{path: '/Category/Name'}"/>
+                    text="{path: 'Category/Name'}"/>
                 <ObjectAttribute
                     title="Lieferant"
                     text="{path: 'Supplier/Name'}"/>
@@ -28,7 +28,7 @@
             </attributes>
             </ObjectHeader>       
             <RatingIndicator id="rating" maxValue="5" value="{Rating}"/>
-            <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/>
+            <!-- <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/> -->
         </l:content>
     </l:VerticalLayout>
     
