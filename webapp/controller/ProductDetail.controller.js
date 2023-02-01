@@ -7,6 +7,8 @@ sap.ui.define(
   
       return Controller.extend("qst4.controller.ProductDetail", {
         _oParent: null,
+        _nNumber: null,
+        _nPrice: null,
         init: function(oParent) {
             this._oParent = oParent;
         },
@@ -18,12 +20,25 @@ sap.ui.define(
           oLayout.insertContent(oFragment, 99);
         },
         formatDate: function(sDate) {
-          console.log("mein Datum", sDate);
           var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-            format: "yMMMd"
-          });
-          
+            format: "yMMMMd"
+          });          
           return oDateFormat.format(sDate);
+        },
+        onOrderNumberChanged: function(oEvent) {
+          var nValue = Number(oEvent.getParameter("selectedItem").getText());
+          this._nNumber = nValue;
+          var oText = this._oParent.getView().byId("detailFragment--preis");
+          var sItemPath = this._oParent.getView().byId("detail").getBindingContext().sPath;          
+
+          var oModel = this._oParent.getOwnerComponent().getModel();
+          oModel.read(sItemPath + "/Price", {
+            success: function (oData) {
+              var nPrice = Number(oData.Price);
+              this._nPrice = nPrice;
+              oText.setText("Aktueller Preis: "+ Number(nValue) * nPrice +"€");
+            }
+          });
         }
 
       });

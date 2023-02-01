@@ -9,7 +9,7 @@
 
         <List id="list" items="{/Products}" class=".listStyle">
             <items>
-                <ObjectListItem id="item1" title="{Name}" number="{Price}€" type="Active" press="onItemPressed">
+                <ObjectListItem id="item1" title="{Name}" number="{Price}" numberUnit="EUR" type="Active" press="onItemPressed">
                     <ObjectAttribute text="{Description}" />
                 </ObjectListItem>
             </items>

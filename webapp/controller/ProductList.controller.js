@@ -22,8 +22,9 @@ sap.ui.define(
             expand: "Supplier, Category"
           }
         });
-        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2]; //this is shitty
+        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1]; //this is shitty
         var oModel = this._oParent.getOwnerComponent().getModel();
+        console.log("oDetailList", oDetailList);
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
             var sSupplier = oData.Name;

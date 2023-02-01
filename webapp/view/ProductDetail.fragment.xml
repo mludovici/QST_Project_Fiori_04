@@ -4,7 +4,8 @@
             <ObjectHeader
             title="{Name}"
             titleLevel="H3"
-            number="{Price}€">
+            number="{Price}"
+            numberUnit="EUR">
             <attributes>
                 <ObjectAttribute
                     title="Beschreibung"
@@ -14,7 +15,7 @@
                     text="{path: 'ReleaseDate', formatter: '.formatDate'}"/>
                 <ObjectAttribute
                     title="DiscontinuedDate"
-                    text="{path: 'DiscontinuedDate', formatter: '.formatDate}"/>
+                    text="{path: 'DiscontinuedDate', formatter: '.formatDate'}"/>
                 <ObjectAttribute
                     title="Kategorie"
                     text="{path: 'Category/Name'}"/>
@@ -28,6 +29,19 @@
             </attributes>
             </ObjectHeader>       
             <RatingIndicator id="rating" maxValue="5" value="{Rating}"/>
+            <l:HorizontalLayout id="horzontalLayout">
+                <l:content>
+                    <Select id="bestellMenge" width="80px" change ="onOrderNumberChanged">
+                        <c:ListItem id="1" text="1"></c:ListItem>
+                        <c:ListItem id="2" text="2"></c:ListItem>
+                        <c:ListItem id="3" text="3"></c:ListItem>
+                        <c:ListItem id="4" text="4"></c:ListItem>
+                    </Select>
+                    <Text id="preis"/>
+                </l:content>
+            </l:HorizontalLayout>
+            <Button id="buttonOrder" text="Jetzt kaufen" icon="sap-icon://customer-order-entry" press="onOrder" width="240px"></Button>
+            <Button id="buttonToCart" text="In den Warenkorb" icon="sap-icon://cart-4" press="onCart" width="240px"></Button>
             <!-- <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/> -->
         </l:content>
     </l:VerticalLayout>
