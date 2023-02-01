@@ -1,9 +1,18 @@
 <c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
-    <List id="list" items="{/Products}">
+<l:VerticalLayout >
+<HBox ><Select items="{/Categories}" change="onSelectionChange">
+    <c:ListItem text="{Name}"/>
+</Select>
+ <Button text="Filter" press="onFilter" /></HBox>
+
+
+    <List id="list" items="{/Products}" class=".listStyle">
         <items>
             <ObjectListItem id="item1" title="{Name}" number="{Price}€"  type ="Active" press= "onItemPressed">                                
                 <ObjectAttribute text="{Description}" />
             </ObjectListItem>
         </items>
     </List>
+</l:VerticalLayout >
+   
 </c:FragmentDefinition>
