@@ -38,24 +38,15 @@ sap.ui.define(
 
       },
       onSelectionChange: function (oEvent) {
-        debugger;
-        var sItem = oEvent.getParameter("selectedItem");
-        var sPath = sItem.getBindingContext().getPath()
-
-        console.log(sPath);
-        // var sPath = oItem.getBindingContext().getPath();
-        // console.log("path:", sPath);
-        var oProductList = this._oParent.getView().byId("masterFragment--list");
-        var oSelectedCategory = oEvent.getParameter("selectedItem").getBindingContext().getPath() //Categories(0)
-        var oTemplate = new sap.m.ObjectAttribute({ text: "{/Name}" });
-        //oProductList.bindItems({ path: oSelectedCategory + '/Products', template: oTemplate });
         var oModel = this._oParent.getOwnerComponent().getModel();
 
-        oModel.read(sPath + "/Products", {
-          success: function (oData) {
-            debugger
-            var sCategory = oData.Name;
-            console.log("oData category", sCategory);
+        var oProductList = this._oParent.getView().byId("masterFragment--list");
+        var oSelectedCategory = oEvent.getParameter("selectedItem").getBindingContext().getPath() //Categories(x)
+
+        oModel.read(oSelectedCategory, {
+          success: function (oCategory) {
+            debugger;
+            var sCategory = oCategory.Name;
             var oFilter = new sap.ui.model.Filter(
               "Category/Name",
               sap.ui.model.FilterOperator.EQ,
@@ -64,20 +55,9 @@ sap.ui.define(
             oProductList.getBinding("items").filter([oFilter]);
           },
           error: function (oError) {
-            console.log("Error:", oError);
+            console.log("Error filtering:", oError);
           }
         });
-
-        debugger;
-        // oProductList.getParameter("items").bindElement({
-        //   path: oSelectedCategory + '/Products'
-        //   // parameters: {
-        //   //   expand: "/Products",
-        //   // }
-        // });
-
-        //oProductList.bindAggregation(oSelectedCategory, { expand: "Products" });
-
       },
 
       onFilter: function (oEvent) {
