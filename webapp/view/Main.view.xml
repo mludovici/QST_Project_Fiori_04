@@ -1,44 +1,19 @@
 <mvc:View controllerName="qst4.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core">
     <SplitApp id="SplitApp">
         <masterPages>
                 <Page id="master" title="{i18n>title}">
                     <content>
-                        <List id="list" items="{/Products}">
-                            <items>
-                                <ObjectListItem id="item1" title="{Name}" number="{Price}€"  type ="Active" press= "onItemPressed">                                
-                                    <ObjectAttribute text="{Description}" />
-                                </ObjectListItem>
-                            </items>
-                        </List>
+                        <c:Fragment fragmentName= "qst4.view.ProductList" type="XML" />
                     </content>
                 </Page>
             </masterPages>
             <detailPages>        
                 <Page id="detail" title="">
                     <content>
-                        <ObjectHeader
-                            title="{Name}"
-                            titleLevel="H3"
-                            number="{Price}€">
-                            <attributes>
-                                <ObjectAttribute
-                                    title="Beschreibung"
-                                    text="{Description}"/>
-                                <ObjectAttribute
-                                    title="Veröffentlicht am:"
-                                    text="{ReleaseDate}"/>
-                                <ObjectAttribute
-                                    title="DiscontinuedDate"
-                                    text="{path: 'DiscontinuedDate'}"/>
-                                <!-- <ObjectAttribute
-                                    title="{i18n>productMeasuresAttributeText}"
-                                    text="{DimensionWidth} {Unit}, {DimensionDepth} {Unit}, {DimensionHeight} {Unit}"/> -->
-                            </attributes>
-                        </ObjectHeader>
-                        
-		                <RatingIndicator id="rating" maxValue="5" value="{Rating}"/>
+                        <c:Fragment fragmentName= "qst4.view.ProductDetail" type="XML" />
                     </content>
                 </Page>  
             </detailPages>

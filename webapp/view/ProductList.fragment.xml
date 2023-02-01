@@ -1,0 +1,9 @@
+<c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
+    <List id="list" items="{/Products}">
+        <items>
+            <ObjectListItem id="item1" title="{Name}" number="{Price}€"  type ="Active" press= "onItemPressed">                                
+                <ObjectAttribute text="{Description}" />
+            </ObjectListItem>
+        </items>
+    </List>
+</c:FragmentDefinition>
