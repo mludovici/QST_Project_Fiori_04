@@ -17,15 +17,17 @@ sap.ui.define(
         //var sIndex = sPath.substr(sPath.lastIndexOf("/") + 1);
         var oDetail = this._oParent.getView().byId("detail");
         oDetail.bindElement({
-          path: sPath
+          path: sPath,
+          parameters: {
+            expand: "Supplier, Category"
+          }
         });
-        var oDetailList = this._oParent.getView().byId("detailFragment--detailList--list");
+        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2]; //this is shitty
 
         var oModel = this._oParent.getOwnerComponent().getModel();
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
             var sSupplier = oData.Name;
-            console.log("oData", sSupplier);
             var oFilter = new sap.ui.model.Filter(
               "Supplier/Name",
               sap.ui.model.FilterOperator.EQ,
