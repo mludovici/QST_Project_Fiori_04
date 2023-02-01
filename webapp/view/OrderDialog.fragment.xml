@@ -1,0 +1,33 @@
+<Dialog xmlns="sap.m"
+xmlns:l="sap.ui.layout"
+title="Bestellbestätigung"
+id ="orderDialog">
+    <content>
+        <l:HorizontalLayout id="dialogHLayout">
+            <l:content>
+                <ObjectHeader
+                title="{Name}"
+                titleLevel="H6"
+                number="{Price}"
+                numberUnit="EUR">
+                <attributes>
+                    <ObjectAttribute
+                        title="Beschreibung"
+                        text="{Description}"/>
+                    <ObjectAttribute
+                        id="dialogMenge"
+                        title="Menge"
+                        text=""/>
+                    <ObjectAttribute
+                        id="dialogPreis"
+                        title="Gesamtpreis"
+                        text=""/>
+                </attributes>
+                </ObjectHeader>
+            </l:content>
+        </l:HorizontalLayout>
+    </content>
+    <buttons>
+        <Button text="Close" press="onDialogClose" />
+    </buttons>
+</Dialog>

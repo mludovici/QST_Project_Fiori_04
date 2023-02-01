@@ -28,7 +28,7 @@
                     text="{DimensionWidth} {Unit}, {DimensionDepth} {Unit}, {DimensionHeight} {Unit}"/> -->
             </attributes>
             </ObjectHeader>       
-            <RatingIndicator id="rating" maxValue="5" value="{Rating}"/>
+            <RatingIndicator id="rating" maxValue="5" value="{Rating}" editable="false"/>
             <l:HorizontalLayout id="horzontalLayout">
                 <l:content>
                     <Select id="bestellMenge" width="80px" change ="onOrderNumberChanged">
