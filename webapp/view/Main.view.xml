@@ -6,14 +6,14 @@
         <masterPages>
                 <Page id="master" title="{i18n>title}">
                     <content>
-                        <c:Fragment fragmentName= "qst4.view.ProductList" type="XML" />
+                        <!-- <c:Fragment fragmentName= "qst4.view.ProductList" type="XML" /> -->
                     </content>
                 </Page>
             </masterPages>
             <detailPages>        
                 <Page id="detail" title="">
                     <content>
-                        <c:Fragment fragmentName= "qst4.view.ProductDetail" type="XML" />
+                        <!-- <c:Fragment fragmentName= "qst4.view.ProductDetail" type="XML" /> -->
                     </content>
                 </Page>  
             </detailPages>

@@ -17,6 +17,6 @@
                 title="{i18n>productMeasuresAttributeText}"
                 text="{DimensionWidth} {Unit}, {DimensionDepth} {Unit}, {DimensionHeight} {Unit}"/> -->
         </attributes>
-    </ObjectHeader>                        
-    <RatingIndicator id="rating" maxValue="5" value="{Rating}"/>
+     </ObjectHeader>                        
+    <!--<RatingIndicator id="rating" maxValue="5" value="{Rating}"/> -->
 </c:FragmentDefinition>

@@ -9,15 +9,15 @@ sap.ui.define([
 
         return Controller.extend("qst4.controller.Main", {
             onInit: function () {
+                var oFragController = sap.ui.controller("qst4.controller.ProductDetail");
+                oFragController.init(this);
+                var oFragment = sap.ui.xmlfragment("qst4.view.ProductDetail", oFragController);
+                this.getView().byId("detail").insertContent(oFragment);
 
-            },
-            onItemPressed: function (oEvent) {
-                var oItem = oEvent.getSource();
-                var sPath= oItem.getBindingContext().getPath(); 
-                var sIndex = sPath.substr(sPath.lastIndexOf("/") + 1);
-                var oDetail = this.getView().byId("detail");
-                oDetail.bindElement(sPath);
-
+                 var oFragController2 = sap.ui.controller("qst4.controller.ProductList");
+                oFragController2.init(this);
+                var oFragment2 = sap.ui.xmlfragment("qst4.view.ProductList", oFragController2);
+                this.getView().byId("master").insertContent(oFragment2);
             }
          });
     });
