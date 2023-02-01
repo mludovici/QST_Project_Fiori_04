@@ -1,13 +1,16 @@
 <c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
-    <l:VerticalLayout>
-        <HBox>
-            <Select items="{/Categories}" change="onSelectionChange">
+    <l:VerticalLayout width="100%">
+        <HBox justifyContent="Start">
+            <Select items="{/Categories}" change="onSelectionChange" forceSelection="false">
                 <c:ListItem text="{Name}" />
             </Select>
-            <Button text="Filter" press="onFilter" />
+            <HBox>
+                <Button width="10px" id="__button1" icon="sap-icon://sort-ascending" press="onSortAsc" />
+                <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
+            </HBox>
         </HBox>
 
-        <List id="list" items="{/Products}" class=".listStyle">
+        <List id="list" items="{/Products}" class=".listStyle" width="100%">
             <items>
                 <ObjectListItem id="item1" title="{Name}" number="{Price}€" type="Active" press="onItemPressed">
                     <ObjectAttribute text="{Description}" />
