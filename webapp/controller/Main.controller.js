@@ -11,7 +11,7 @@ sap.ui.define([
             onInit: function () {
                 var oFragController = sap.ui.controller("qst4.controller.ProductDetail");
                 oFragController.init(this);
-                var oFragment = sap.ui.xmlfragment("qst4.view.ProductDetail", oFragController);
+                var oFragment = sap.ui.xmlfragment(this.createId("detailFragment"), "qst4.view.ProductDetail", oFragController);
                 this.getView().byId("detail").insertContent(oFragment);
 
                  var oFragController2 = sap.ui.controller("qst4.controller.ProductList");
