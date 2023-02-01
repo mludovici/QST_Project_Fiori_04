@@ -23,7 +23,6 @@ sap.ui.define(
           }
         });
         var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2]; //this is shitty
-
         var oModel = this._oParent.getOwnerComponent().getModel();
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
@@ -36,8 +35,6 @@ sap.ui.define(
             oDetailList.getBinding("items").filter([oFilter]);
           }
         });
-
-
       },
       onSelectionChange: function (oEvent) {
         var oModel = this._oParent.getOwnerComponent().getModel();
