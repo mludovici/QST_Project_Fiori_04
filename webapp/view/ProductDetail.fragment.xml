@@ -1,11 +1,11 @@
-<c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
-    <l:VerticalLayout id="detailLayout">
+<c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml">
+    <l:VerticalLayout id="detailLayout" class="detailClass">
         <l:content>
             <ObjectHeader title="{Name}" titleLevel="H3" number="{Price}" numberUnit="EUR">
                 <attributes>
                     <ObjectAttribute title="Beschreibung" text="{Description}" />
                     <ObjectAttribute title="Veröffentlicht am" text="{path: 'ReleaseDate', formatter: '.formatDate'}" />
-                    <ObjectAttribute title="DiscontinuedDate" text="{path: 'DiscontinuedDate', formatter: '.formatDate'}" />
+                    <ObjectAttribute title="Verfügbar bis" text="{path: 'DiscontinuedDate', formatter: '.formatDate'}" />
                     <ObjectAttribute title="Kategorie" text="{path: 'Category/Name'}" />
                     <ObjectAttribute title="Lieferant" text="{path: 'Supplier/Name'}" />
 
@@ -14,21 +14,27 @@
                     text="{DimensionWidth} {Unit}, {DimensionDepth} {Unit}, {DimensionHeight} {Unit}"/> -->
                 </attributes>
             </ObjectHeader>
-            <RatingIndicator id="rating" maxValue="5" value="{Rating}" editable="false" />
-            <l:HorizontalLayout id="horzontalLayout">
-                <l:content>
-                    <Select id="bestellMenge" width="80px" change="onOrderNumberChanged">
-                        <c:ListItem id="1" text="1" />
-                        <c:ListItem id="2" text="2" />
-                        <c:ListItem id="3" text="3" />
-                        <c:ListItem id="4" text="4" />
-                    </Select>
-                    <Text id="preis" text="Aktueller Preis: {Price}€" />
-                </l:content>
-            </l:HorizontalLayout>
-            <Button id="buttonOrder" text="Jetzt kaufen" icon="sap-icon://customer-order-entry" press="onOrder" width="240px" />
-            <Button id="buttonToCart" text="In den Warenkorb" icon="sap-icon://cart-4" press="addToCart" width="240px" />
-            <!-- <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/> -->
+            <VBox class="vBoxMargin">
+                <html:h4>Bewertung</html:h4>
+                <RatingIndicator class="middleAlign" id="rating" maxValue="5" value="{Rating}" editable="false" />
+                <html:h4>Bestellen</html:h4>
+                <l:HorizontalLayout id="horzontalLayout">
+                    <l:content>
+                        <Select id="bestellMenge" width="80px" change="onOrderNumberChanged">
+                            <c:ListItem id="1" text="1" />
+                            <c:ListItem id="2" text="2" />
+                            <c:ListItem id="3" text="3" />
+                            <c:ListItem id="4" text="4" />
+                        </Select>
+                        <Text id="preis" text="Aktueller Preis: {Price}€" />
+                    </l:content>
+                </l:HorizontalLayout>
+                <Button id="buttonOrder" text="Jetzt kaufen" icon="sap-icon://customer-order-entry" press="onOrder" width="240px" />
+                <Button id="buttonToCart" text="In den Warenkorb" icon="sap-icon://cart-4" press="onCart" width="240px" />
+                <html:h4>Weitere Produkte des Herrstellers</html:h4>
+
+                <!-- <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/> -->
+            </VBox>
         </l:content>
     </l:VerticalLayout>
 </c:FragmentDefinition>

@@ -36,7 +36,7 @@ sap.ui.define(
             this._oCurrentItemModel.setProperty("/PriceAll", oData.Price);
           }.bind(this)
         });
-        if (!this._bDetailAdded) {
+        if (!this._bDetailAdded && this._bMaster) {
           console.log("Add");
           var oFragController = sap.ui.controller("qst4.controller.ProductDetail");
           oFragController.init(this._oParent);
@@ -57,7 +57,7 @@ sap.ui.define(
           }
         });
         console.log("Falls ich das schon wieder verliere....", this._oParent.getView().byId("detailFragment--detailLayout"));
-        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1]; //this is shitty
+        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2].mAggregations.content[1]; //this is shitty
 
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
@@ -153,7 +153,7 @@ sap.ui.define(
         if (this._bMaster) {
           oItemsList = this._oParent.getView().byId("masterFragment--list");
         } else {
-          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1];
+          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2].mAggregations.content[1];
         }
         return oItemsList;
       },
