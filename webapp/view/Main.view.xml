@@ -1,24 +1,22 @@
-<mvc:View controllerName="qst4.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m"
-    xmlns:c="sap.ui.core">
+<mvc:View controllerName="qst4.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:c="sap.ui.core">
     <SplitApp id="SplitApp">
         <masterPages>
-                <Page id="master" title="{i18n>title}">
-                    <content>
-                        <!-- <c:Fragment fragmentName= "qst4.view.ProductList" type="XML" /> -->
-                    </content>
-                </Page>
-            </masterPages>
-            <detailPages>        
-                <Page id="detail" title="">
-                    <headerContent>
-                        <Button icon="sap-icon://cart" />
-                    </headerContent>
-                    <content>
-                        <!-- <c:Fragment fragmentName= "qst4.view.ProductDetail" type="XML" /> -->
-                    </content>
-                </Page>  
-            </detailPages>
-        </SplitApp>
+            <Page id="master" title="{i18n>title}">
+                <content>
+                    <Button id="mainButton" text="to Cart >" press="toCart" />
+                    <!-- <c:Fragment fragmentName= "qst4.view.ProductList" type="XML" /> -->
+                </content>
+            </Page>
+        </masterPages>
+        <detailPages>
+            <Page id="detail" title="">
+                <headerContent>
+                    <Button icon="sap-icon://cart" />
+                </headerContent>
+                <content>
+                    <!-- <c:Fragment fragmentName= "qst4.view.ProductDetail" type="XML" /> -->
+                </content>
+            </Page>
+        </detailPages>
+    </SplitApp>
 </mvc:View>

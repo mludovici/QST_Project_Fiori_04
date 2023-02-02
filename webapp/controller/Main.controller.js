@@ -1,5 +1,6 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -19,6 +20,16 @@ sap.ui.define([
                 oFragController2.init(this, true);
                 var oFragment2 = sap.ui.xmlfragment(this.createId("masterFragment"), "qst4.view.ProductList", oFragController2);
                 this.getView().byId("master").insertContent(oFragment2);
-            }
+            },
+            toCart: function (oEvent) {
+                debugger;
+                console.log("Nav Event: ", oEvent);
+                var oRouter = this.getOwnerComponent().getRouter();
+                // var oROuter2 = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("ShoppingCart");
+            },
+
+
+
         });
     });
