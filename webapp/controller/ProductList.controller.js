@@ -10,14 +10,24 @@ sap.ui.define(
     return Controller.extend("qst4.controller.ProductList", {
       _oParent: null,
       _bMaster: null,
+      _oCurrentItemModel: null,
       init: function (oParent, isMaster) {
         this._bMaster = isMaster
         this._oParent = oParent;
+        this._oCurrentItemModel = this._oParent.getOwnerComponent().getModel("currentItem");
       },
       onItemPressed: function (oEvent) {
         var oItem = oEvent.getSource();
         var sPath = oItem.getBindingContext().getPath(); // /Products(0)
+        var oModel = this._oParent.getOwnerComponent().getModel();
         //var sIndex = sPath.substr(sPath.lastIndexOf("/") + 1);
+
+        oModel.read(sPath, {
+          success: function (oData) {
+            this._oCurrentItemModel.setData(oData);            
+          }.bind(this)
+        });
+
         var oDetail = this._oParent.getView().byId("detail");
         oDetail.bindElement({
           path: sPath,
@@ -25,8 +35,8 @@ sap.ui.define(
             expand: "Supplier, Category"
           }
         });
-        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1]; //this is shitty
-        var oModel = this._oParent.getOwnerComponent().getModel();
+        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[2]; //this is shitty
+
         console.log("oDetailList", oDetailList);
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
@@ -121,7 +131,7 @@ sap.ui.define(
         if (this._bMaster) {
           oItemsList = this._oParent.getView().byId("masterFragment--list");
         } else {
-          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1];
+          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[2];
         }
         return oItemsList;
       },

@@ -1,27 +1,25 @@
 <Dialog xmlns="sap.m"
 xmlns:l="sap.ui.layout"
 title="Bestellbestätigung"
-id ="orderDialog">
+id ="orderDialog"
+contentWidth= "350px">
     <content>
         <l:HorizontalLayout id="dialogHLayout">
             <l:content>
                 <ObjectHeader
-                title="{Name}"
+                title="{model>/Number} x {model>/Name}"
                 titleLevel="H6"
-                number="{Price}"
+                number="{model>/PriceAll}"
                 numberUnit="EUR">
                 <attributes>
                     <ObjectAttribute
                         title="Beschreibung"
-                        text="{Description}"/>
+                        text="{model>/Description}"/>
                     <ObjectAttribute
-                        id="dialogMenge"
-                        title="Menge"
-                        text=""/>
-                    <ObjectAttribute
-                        id="dialogPreis"
-                        title="Gesamtpreis"
-                        text=""/>
+                        id="price"
+                        title="Einzelpreis"
+                        text="{model>/Price} EUR"
+                        />
                 </attributes>
                 </ObjectHeader>
             </l:content>

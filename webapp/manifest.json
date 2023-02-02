@@ -76,6 +76,12 @@
           "useBatch": false,
           "defaultBindingMode": "TwoWay"
         }
+      },
+      "currentItem": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false,
+        "uri": "model/CurrentItem.json"
       }
     },
     "resources": {
