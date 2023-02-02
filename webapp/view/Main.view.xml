@@ -12,6 +12,9 @@
             </masterPages>
             <detailPages>        
                 <Page id="detail" title="">
+                    <headerContent>
+                        <Button icon="sap-icon://cart" />
+                    </headerContent>
                     <content>
                         <!-- <c:Fragment fragmentName= "qst4.view.ProductDetail" type="XML" /> -->
                     </content>
