@@ -78,10 +78,11 @@ sap.ui.define(
         var oItem = oEvent.getSource();
         var sPath = oItem.getBindingContext().getPath();
         let oModel = this._oParent.getOwnerComponent().getModel();
+        var _oSingleItem;
         oModel.read(sPath, {
           success: function (oData) {
             var shoppingItems = this._oShoppingCartModel.getProperty("/items");
-            var singleItem = this._oCurrentItemModel.getData();
+            _oSingleItem = this._oCurrentItemModel.getData();
 
             if (shoppingItems.some(function (item) {
               return item.ID == oData.ID
@@ -94,11 +95,18 @@ sap.ui.define(
                 return item;
               });
             } else {
-              shoppingItems.push(singleItem);
+              shoppingItems.push(_oSingleItem);
             }
             this._oShoppingCartModel.setProperty("/items", shoppingItems);
+
+            sap.m.MessageToast.show(`Zu Einkaufswagen hinzugefügt: ${_oSingleItem.Name} `, {
+              duration: 3000,                  // default
+            });
           }.bind(this),
           error: function (oError) {
+            sap.m.MessageToast.show(`Fehler beim hinzufügen`, {
+              duration: 3000,                  // default
+            });
             console.log("Error:", oError);
           }
         })

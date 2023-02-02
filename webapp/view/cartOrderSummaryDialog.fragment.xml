@@ -1,0 +1,16 @@
+<Dialog xmlns="sap.m" xmlns:l="sap.ui.layout" title="Bestellvorgang abgeschlossen" id="cartOrderDialog" contentWidth="350px">
+    <content>
+        <l:HorizontalLayout id="dialogHLayout">
+            <l:content>
+                <ObjectHeader title="Bestellung erfolgreich" titleLevel="H5">
+                    <attributes>
+                        <ObjectAttribute title="Gesamtpreis" text="{summaryModel>/sumPriceShoppingCart}" />
+                    </attributes>
+                </ObjectHeader>
+            </l:content>
+        </l:HorizontalLayout>
+    </content>
+    <buttons>
+        <Button text="Close" press="onDialogClose" />
+    </buttons>
+</Dialog>

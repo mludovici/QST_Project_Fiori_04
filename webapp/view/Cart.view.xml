@@ -1,4 +1,4 @@
-<mvc:View controllerName="qst4.controller.Cart" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout">
+<mvc:View controllerName="qst4.controller.Cart" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml">
     <Page id="cartView" showNavButton="true" navButtonPress="onNavBack">
         <content>
             <Table id="idProductsTable" items="{
@@ -44,23 +44,23 @@
                             <Text text="{shoppingCartModel>ID}" id="__text3" />
                             <Text text="{shoppingCartModel>Name}" id="__text4" />
                             <Text text="{shoppingCartModel>Description}" id="__text5" />
-                            <HBox> 
                             <Text text="{shoppingCartModel>Number}" id="__text6" />
-                            <Button text="test" />
-                            </HBox>
-                           
                             <Text text="{shoppingCartModel>Price}" id="__text7" />
                             <Text text="{shoppingCartModel>PriceAll}" id="__text8" />
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
-
-            <VBox>
-            <HBox><Text text="Bestell Zusammenfassung"</HBox>
+            <!-- visible="{= ${UIModel>/sumPriceShoppingCart} > 0 ? true : false} -->
+            <VBox class="customMarginTop" visible="{= ${UIModel>/sumPriceShoppingCart} &gt; 0 ? true : false}">
+                <html:h4>Zusammenfassung</html:h4>
+                <HBox class="customOrderSummary">
+                    <html:h4>
+                        <Text text="Gesamtpreis: {UIModel>/sumPriceShoppingCart} €" />
+                    </html:h4>
+                    <Button text="Bestellung abschließen" press="onCartOrder" />
+                </HBox>
             </VBox>
         </content>
-
-        
     </Page>
 </mvc:View>
