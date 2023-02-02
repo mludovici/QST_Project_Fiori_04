@@ -36,6 +36,7 @@ sap.ui.define(
       },
 
       onOrderNumberChanged: function (oEvent) {
+        console.log("onOrderNumberChanged");
         var nValue = Number(oEvent.getParameter("selectedItem").getText());
         this._nNumber = nValue;
         var oText = this._oParent.getView().byId("detailFragment--preis");

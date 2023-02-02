@@ -13,6 +13,8 @@ sap.ui.define([
             onInit: function () {
                 this._oShoppingCartModel = this.getOwnerComponent().getModel("shoppingCartModel");
                 this.getView().setModel(this._oShoppingCartModel);
+                this._oUIModel = this.getOwnerComponent().getModel("UIModel");
+                this.orderSummary();
             },
             onNavBack: function () {
                 var data = this._oShoppingCartModel.getData();
@@ -30,8 +32,12 @@ sap.ui.define([
             },
             orderSummary: function () {
                 let shoppingItems = this._oShoppingCartModel.getProperty("items");
+                if (!shoppingItems || shoppingItems.length == 0) {
+                    return;
+                }
                 let sumPrice = shoppingItems.reduce((accumulator, currentValue) => accumulator + currentValue.PriceAll, 0);
-                console.log(sumPrice);
+                this._oUIModel.setProperty("/sumPriceShoppingCart", sumPrice);
+
                 debugger;
             }
         });

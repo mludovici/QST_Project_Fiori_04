@@ -17,13 +17,13 @@
             <RatingIndicator id="rating" maxValue="5" value="{Rating}" editable="false" />
             <l:HorizontalLayout id="horzontalLayout">
                 <l:content>
-                    <Select id="bestellMenge" width="80px" change="onOrderNumberChanged" forceSelection="false">
+                    <Select id="bestellMenge" width="80px" change="onOrderNumberChanged">
                         <c:ListItem id="1" text="1" />
                         <c:ListItem id="2" text="2" />
                         <c:ListItem id="3" text="3" />
                         <c:ListItem id="4" text="4" />
                     </Select>
-                    <Text id="preis" />
+                    <Text id="preis" text="Aktueller Preis: {Price}€" />
                 </l:content>
             </l:HorizontalLayout>
             <Button id="buttonOrder" text="Jetzt kaufen" icon="sap-icon://customer-order-entry" press="onOrder" width="240px" />

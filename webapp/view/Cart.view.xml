@@ -44,13 +44,23 @@
                             <Text text="{shoppingCartModel>ID}" id="__text3" />
                             <Text text="{shoppingCartModel>Name}" id="__text4" />
                             <Text text="{shoppingCartModel>Description}" id="__text5" />
+                            <HBox> 
                             <Text text="{shoppingCartModel>Number}" id="__text6" />
+                            <Button text="test" />
+                            </HBox>
+                           
                             <Text text="{shoppingCartModel>Price}" id="__text7" />
                             <Text text="{shoppingCartModel>PriceAll}" id="__text8" />
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
+
+            <VBox>
+            <HBox><Text text="Bestell Zusammenfassung"</HBox>
+            </VBox>
         </content>
+
+        
     </Page>
 </mvc:View>

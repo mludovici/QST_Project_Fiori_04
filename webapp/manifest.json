@@ -88,6 +88,12 @@
         "settings": {},
         "preload": false,
         "uri": "model/CurrentItem.json"
+      },
+      "UIModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false,
+        "uri": "model/UIModel.json"
       }
     },
     "resources": {

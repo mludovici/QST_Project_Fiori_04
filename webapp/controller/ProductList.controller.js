@@ -11,6 +11,9 @@ sap.ui.define(
       _oParent: null,
       _bMaster: null,
       _oCurrentItemModel: null,
+      _oCategoryFilter: null,
+      _oSupplierFilter: null,
+      _bDetailAdded: false,
       init: function (oParent, isMaster) {
         this._bMaster = isMaster
         this._oParent = oParent;
@@ -33,6 +36,18 @@ sap.ui.define(
             this._oCurrentItemModel.setProperty("/PriceAll", oData.Price);
           }.bind(this)
         });
+        if (!this._bDetailAdded) {
+          console.log("Add");
+          var oFragController = sap.ui.controller("qst4.controller.ProductDetail");
+          oFragController.init(this._oParent);
+          var oFragment = sap.ui.xmlfragment(this._oParent.createId("detailFragment"), "qst4.view.ProductDetail", oFragController);
+          this._oParent.getView().byId("detail").insertContent(oFragment);
+          oFragController.insertDetailList();
+          this._bDetailAdded = true;
+        } else {
+          var oSelect = this._oParent.getView().byId("detailFragment--bestellMenge");
+          oSelect.setValue("1");
+        }
 
         var oDetail = this._oParent.getView().byId("detail");
         oDetail.bindElement({
@@ -41,9 +56,9 @@ sap.ui.define(
             expand: "Supplier, Category"
           }
         });
-        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[2]; //this is shitty
+        console.log("Falls ich das schon wieder verliere....", this._oParent.getView().byId("detailFragment--detailLayout"));
+        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1]; //this is shitty
 
-        console.log("oDetailList", oDetailList);
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
             var sSupplier = oData.Name;
@@ -56,7 +71,7 @@ sap.ui.define(
           }
         });
       },
-      onSelectCategory: function (oEvent) {
+      /*onSelectCategory: function (oEvent) {
         var oModel = this._oParent.getOwnerComponent().getModel();
         var oItemsList = this.checkMasterDetailListView();
 
@@ -120,7 +135,7 @@ sap.ui.define(
           });
         }
 
-      },
+      }, */
       onSortAsc: function (oEvent) {
         var oItemsList = this.checkMasterDetailListView();
 
@@ -138,7 +153,7 @@ sap.ui.define(
         if (this._bMaster) {
           oItemsList = this._oParent.getView().byId("masterFragment--list");
         } else {
-          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[2];
+          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1];
         }
         return oItemsList;
       },
@@ -160,12 +175,77 @@ sap.ui.define(
         var jsModel = new sap.ui.model.json.JSONModel({
           filterPath: '/' + oSelectedRadioButtonValue
         });
+      },
+      onSelectCategory: function (oEvent) {
+        var oModel = this._oParent.getOwnerComponent().getModel();
+        var oItemsList = this.checkMasterDetailListView();
 
-        //this._oParent.byId("masterFragment--list").setModel(jsModel);
+        var sSelectedCategory = oEvent.getParameter("selectedItem").getText();
+        this._oCategoryFilter = new sap.ui.model.Filter(
+          "Category/Name",
+          sap.ui.model.FilterOperator.EQ,
+          sSelectedCategory
+        );
+        if (this._oSupplierFilter != null) {
+          oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter]);
+        } else {
+          oItemsList.getBinding("items").filter([this._oCategoryFilter]);
+        }
+      },
+      onSelectSupplier: function (oEvent) {
+        var oModel = this._oParent.getOwnerComponent().getModel();
+        var oItemsList = this.checkMasterDetailListView();
 
-        //oDropDownBox.bindElement({ path: '/' + oSelectedRadioButtonValue });
-        //oDropDownBox.bindItems('/' + oSelectedRadioButtonValue);
+        var sSelectedSupplier = oEvent.getParameter("selectedItem").getText();
+        this._oSupplierFilter = new sap.ui.model.Filter(
+          "Supplier/Name",
+          sap.ui.model.FilterOperator.EQ,
+          sSelectedSupplier
+        );
+        if (this._oCategoryFilter != null) {
+          oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter]);
+        } else {
+          oItemsList.getBinding("items").filter([this._oSupplierFilter]);
+        }
+      },
+      onResetFilter: function () {
+        var oItemsList = this.checkMasterDetailListView();
+        oItemsList.getBinding("items").filter(null);
+        this._oSupplierFilter = null;
+        this._oCategoryFilter = null;
+        var select;
+        var select2;
+        if (this._bMaster == true) {
+          select = this._oParent.getView().byId("masterFragment--selectFilterDropDown");
+          select2 = this._oParent.getView().byId("masterFragment--selectFilterDropDown2");
 
+        } else {
+          select = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[0].mAggregations.items[0].mAggregations.items[0];
+          select2 = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[0].mAggregations.items[0].mAggregations.items[1];
+        }
+        select.setValue(null);
+        select2.setValue(null);
+      },
+      onFilter: function () {
+        if (!this._oDialog) {
+          Fragment.load({
+            id: "filterDialog",
+            name: "qst4.view.Filter",
+            type: "XML",
+            controller: this
+          }).then(function (oDialog) {
+            this._oDialog = oDialog;
+            this._oDialog.open();
+            //this._oDialog.bindElement({path:"/", model: "currentItem"}); // /Products(0)
+            this._oDialog.setModel(this._oParent.getOwnerComponent().getModel(), "model");
+            this._oDialog.setModel(this._oParent.getOwnerComponent().getModel("UIModel"), "UImodel");
+          }.bind(this));
+        } else {
+          this._oDialog.open();
+        }
+      },
+      onDialogClose: function (oEvent) {
+        this._oDialog.close();
       }
     });
   }
