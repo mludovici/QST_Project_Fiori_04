@@ -17,7 +17,7 @@
             <RatingIndicator id="rating" maxValue="5" value="{Rating}" editable="false" />
             <l:HorizontalLayout id="horzontalLayout">
                 <l:content>
-                    <Select id="bestellMenge" width="80px" change="onOrderNumberChanged">
+                    <Select id="bestellMenge" width="80px" change="onOrderNumberChanged" forceSelection="false">
                         <c:ListItem id="1" text="1" />
                         <c:ListItem id="2" text="2" />
                         <c:ListItem id="3" text="3" />

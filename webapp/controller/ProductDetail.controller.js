@@ -8,10 +8,12 @@ sap.ui.define(
 
     return Controller.extend("qst4.controller.ProductDetail", {
       _oParent: null,
+      _oCurrentItemModel: null,
       _nNumber: null,
       _nPrice: null,
       _oDialog: null,
       _sCurrentPath: null,
+
       init: function (oParent) {
         this._oParent = oParent;
         this._oShoppingCartModel = this._oParent.getOwnerComponent().getModel("shoppingCartModel");//new sap.ui.model.json.JSONModel();
@@ -19,7 +21,9 @@ sap.ui.define(
         // this.oShoppingCartModel.setProperty("/test", {
         //   data: 123
         // })
+        this._oCurrentItemModel = this._oParent.getOwnerComponent().getModel("currentItem");
       },
+
       insertDetailList: function () {
         var oFragController = sap.ui.controller("qst4.controller.ProductList");
         oFragController.init(this._oParent);
@@ -27,12 +31,14 @@ sap.ui.define(
         var oLayout = this._oParent.getView().byId("detailFragment--detailLayout");
         oLayout.insertContent(oFragment, 99);
       },
+
       formatDate: function (sDate) {
         var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
           format: "yMMMMd"
         });
         return oDateFormat.format(sDate);
       },
+
       onOrderNumberChanged: function (oEvent) {
         var nValue = Number(oEvent.getParameter("selectedItem").getText());
         this._nNumber = nValue;
@@ -45,9 +51,12 @@ sap.ui.define(
             var nPrice = Number(oData.Price);
             this._nPrice = nPrice;
             oText.setText("Aktueller Preis: " + Number(nValue) * nPrice + "€");
-          }
+            this._oCurrentItemModel.setProperty("/PriceAll", this._nPrice * this._nNumber);
+            this._oCurrentItemModel.setProperty("/Number", this._nNumber);
+          }.bind(this)
         });
       },
+
       onOrder: function () {
         if (!this._oDialog) {
           Fragment.load({
@@ -58,8 +67,8 @@ sap.ui.define(
           }).then(function (oDialog) {
             this._oDialog = oDialog;
             this._oDialog.open();
-            console.log("Pfad: ", this._sCurrentPath);
-            this._oDialog.bindElement({ path: this._sCurrentPath }); // /Products(0)
+            //this._oDialog.bindElement({path:"/", model: "currentItem"}); // /Products(0)
+            this._oDialog.setModel(this._oCurrentItemModel, "model");
           }.bind(this));
         } else {
           this._oDialog.open();

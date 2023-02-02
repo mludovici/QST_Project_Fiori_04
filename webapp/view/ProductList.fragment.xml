@@ -23,24 +23,10 @@
                 <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
             </HBox>
         </HBox> -->
-        <VBox class="sapUiSmallMargin">
-            <Label text="Select filter category" labelFor="GroupA" />
-            <RadioButtonGroup id="GroupA" select="onSelectFilter">
-                <RadioButton text="Categories" selected="true" value="/Categories" />
-                <RadioButton text="Supplier" value="/Supplier" />
-            </RadioButtonGroup>
-        </VBox>
-        <HBox justifyContent="Start">
-            <Select items="{/Categories}" change="onSelectCategory" forceSelection="false" id="selectCategories">
-                <c:ListItem text="{Name}" />
-            </Select>
-            <Select items="{/Suppliers}" change="onSelectSupplier" forceSelection="false" id="selectSuppliers" visible="false">
-                <c:ListItem text="{Name}" />
-            </Select>
-            <HBox>
-                <Button width="10px" id="__button1" icon="sap-icon://sort-ascending" press="onSortAsc" />
-                <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
-            </HBox>
+        <HBox justifyContent="End">
+            <Button width="10px" id="buttonFilter" icon="sap-icon://filter" press="onFilter" />
+            <Button width="10px" id="__button1" icon="sap-icon://sort-ascending" press="onSortAsc" />
+            <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
         </HBox>
 
         <List id="list" items="{/Products}" class=".listStyle" width="100%">
