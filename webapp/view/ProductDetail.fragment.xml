@@ -30,7 +30,7 @@
                     </l:content>
                 </l:HorizontalLayout>
                 <Button id="buttonOrder" text="Jetzt kaufen" icon="sap-icon://customer-order-entry" press="onOrder" width="240px" />
-                <Button id="buttonToCart" text="In den Warenkorb" icon="sap-icon://cart-4" press="onCart" width="240px" />
+                <Button id="buttonToCart" text="In den Warenkorb" icon="sap-icon://cart-4" press="addToCart" width="240px" />
                 <html:h4>Weitere Produkte des Herrstellers</html:h4>
 
                 <!-- <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/> -->

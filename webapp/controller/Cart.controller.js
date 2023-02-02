@@ -33,7 +33,7 @@ sap.ui.define([
             },
             toMain: function () {
                 var oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo("");
+                oRouter.navTo("RouteMain");
             },
             orderSummary: function () {
                 debugger;
@@ -46,6 +46,7 @@ sap.ui.define([
 
             },
             onCartOrder: function () {
+                debugger;
                 if (!this._oDialog) {
                     Fragment.load({
                         id: "oCartDialog",
@@ -64,6 +65,8 @@ sap.ui.define([
             },
             onDialogClose: function (oEvent) {
                 this._oDialog.close();
+                this._oShoppingCartModel.setProperty("/items", []);
+                this._oUIModel.setProperty("/sumPriceShoppingCart", 0);
             },
         });
     })

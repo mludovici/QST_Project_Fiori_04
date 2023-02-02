@@ -75,6 +75,7 @@ sap.ui.define(
         this._oDialog.close();
       },
       addToCart: function (oEvent) {
+        debugger;
         var oItem = oEvent.getSource();
         var sPath = oItem.getBindingContext().getPath();
         let oModel = this._oParent.getOwnerComponent().getModel();
