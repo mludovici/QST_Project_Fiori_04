@@ -28,6 +28,7 @@ sap.ui.define(
         oModel.read(sPath, {
           success: function (oData) {
             this._oCurrentItemModel.setData(oData);
+            this._oCurrentItemModel.setProperty("/Number", "1");
           }.bind(this)
         });
         if(!this._bDetailAdded) {
@@ -51,7 +52,7 @@ sap.ui.define(
           }
         });
         console.log("Falls ich das schon wieder verliere....", this._oParent.getView().byId("detailFragment--detailLayout"));
-        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1]; //this is shitty
+        var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2].mAggregations.content[1]; //this is shitty
 
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
@@ -147,12 +148,11 @@ sap.ui.define(
         if (this._bMaster) {
           oItemsList = this._oParent.getView().byId("masterFragment--list");
         } else {
-          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1];
+          oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2].mAggregations.content[1];
         }
         return oItemsList;
       },
       onSelectFilter: function (oEvent) {
-        debugger;
         console.log(oEvent);
         let selectedIndex = oEvent.getParameter("selectedIndex");
         var oSelectedRadioButtonValue = oEvent.getSource().getAggregation("buttons")[selectedIndex].getText();

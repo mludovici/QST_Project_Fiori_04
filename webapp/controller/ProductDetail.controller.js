@@ -45,7 +45,6 @@ sap.ui.define(
         this._nNumber = nValue;
         var oText = this._oParent.getView().byId("detailFragment--preis");
         this._sCurrentPath = this._oParent.getView().byId("detail").getBindingContext().sPath;
-        debugger;
         var oModel = this._oParent.getOwnerComponent().getModel();
         oModel.read(this._sCurrentPath + "/Price", {
           success: function (oData) {

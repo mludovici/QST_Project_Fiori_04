@@ -6,3 +6,9 @@
 .masterClass {
     width: 40%;
 }
+.detailClass {
+    width:100%;
+}
+.vBoxMargin{
+    margin-left: 35px;
+}
