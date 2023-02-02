@@ -23,11 +23,22 @@
                 <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
             </HBox>
         </HBox> -->
-        <HBox justifyContent="End">
-            <Button width="10px" id="buttonFilter" icon="sap-icon://filter" press="onFilter" />
-            <Button width="10px" id="__button1" icon="sap-icon://sort-ascending" press="onSortAsc" />
-            <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
-        </HBox>
+        <VBox>
+            <HBox justifyContent="Start">
+                <Select items="{/Categories}" change="onSelectCategory" forceSelection="false" id="selectFilterDropDown">
+                    <c:ListItem text="{Name}" />
+                </Select>
+                <Select items="{/Suppliers}" change="onSelectSupplier" forceSelection="false" id="selectFilterDropDown2">
+                    <c:ListItem text="{Name}" />
+                </Select>
+            </HBox>
+            <HBox>
+                <!-- <Button width="10px" id="buttonFilter" icon="sap-icon://filter" press="onFilter" /> -->
+                <Button width="10px" id="resetFilter" icon="sap-icon://clear-filter" press="onResetFilter" />
+                <Button width="10px" id="__button1" icon="sap-icon://sort-ascending" press="onSortAsc" />
+                <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
+            </HBox>        
+        </VBox>
 
         <List id="list" items="{/Products}" class=".listStyle" width="100%">
             <items>

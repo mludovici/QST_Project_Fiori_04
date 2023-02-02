@@ -1,0 +1,25 @@
+<Dialog xmlns="sap.m"
+xmlns:l="sap.ui.layout" 
+xmlns:c="sap.ui.core"
+title="Filtern"
+id ="filterDialog"
+contentWidth= "350px">
+    <content>
+        <l:HorizontalLayout id="dialogHLayout">
+            <l:content>
+                <Select id="filterSelect">
+                    <c:ListItem id="selectItemCat" text="Kategorie" value="k"/>
+                    <c:ListItem id="selectItemSup" text="Supplier" value="s"/>
+                </Select>
+                <VBox items="{= ${UIModel>/filterCategorySelected} === true ? ${model>/Categories} : ${model>/Suppliers} }" >
+                    <items>
+                        <CheckBox text='{Name}'/>
+                    </items>
+                </VBox>
+            </l:content>
+        </l:HorizontalLayout>
+    </content>
+    <buttons>
+        <Button text="Filter" press="onApplyFilter" />
+    </buttons>
+</Dialog>
