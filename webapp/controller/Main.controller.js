@@ -21,11 +21,8 @@ sap.ui.define([
                 var oFragment2 = sap.ui.xmlfragment(this.createId("masterFragment"), "qst4.view.ProductList", oFragController2);
                 this.getView().byId("master").insertContent(oFragment2);
             },
-            toCart: function (oEvent) {
-                debugger;
-                console.log("Nav Event: ", oEvent);
+            navToCart: function (oEvent) {
                 var oRouter = this.getOwnerComponent().getRouter();
-                // var oROuter2 = sap.ui.core.UIComponent.getRouterFor(this);
                 oRouter.navTo("ShoppingCart");
             },
 

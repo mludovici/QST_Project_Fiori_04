@@ -31,7 +31,7 @@
             </RadioButtonGroup>
         </VBox>
         <HBox justifyContent="Start">
-            <Select items="{/filterPath}" change="onSelectCategory" forceSelection="false" id="selectFilterDropDown">
+            <Select items="{/Categories}" change="onSelectCategory" forceSelection="false" id="selectFilterDropDown">
                 <c:ListItem text="{Name}" />
             </Select>
             <Select items="{/Suppliers}" change="onSelectSupplier" forceSelection="false">

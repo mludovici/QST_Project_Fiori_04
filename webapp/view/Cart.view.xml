@@ -1,7 +1,7 @@
 <mvc:View controllerName="qst4.controller.Cart" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout">
-    <l:VerticalLayout id="cartView" navButtonPress="onNavBack" showNavButton="true">
-        <l:content>
-            <Text text="SHOPPING CART VIEW" />
-        </l:content>
-    </l:VerticalLayout>
+    <Page id="cartView" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Text id="detailText" text="SHOPPING CART" />
+        </content>
+    </Page>
 </mvc:View>
