@@ -1,35 +1,21 @@
 <c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
-    <l:VerticalLayout id= "detailLayout">
+    <l:VerticalLayout id="detailLayout">
         <l:content>
-            <ObjectHeader
-            title="{Name}"
-            titleLevel="H3"
-            number="{Price}€">
-            <attributes>
-                <ObjectAttribute
-                    title="Beschreibung"
-                    text="{Description}"/>
-                <ObjectAttribute
-                    title="Veröffentlicht am"
-                    text="{path: 'ReleaseDate', formatter: '.formatDate'}"/>
-                <ObjectAttribute
-                    title="DiscontinuedDate"
-                    text="{path: 'DiscontinuedDate', formatter: '.formatDate}"/>
-                <ObjectAttribute
-                    title="Kategorie"
-                    text="{path: 'Category/Name'}"/>
-                <ObjectAttribute
-                    title="Lieferant"
-                    text="{path: 'Supplier/Name'}"/>
+            <ObjectHeader title="{Name}" titleLevel="H3" number="{Price}€">
+                <attributes>
+                    <ObjectAttribute title="Beschreibung" text="{Description}" />
+                    <ObjectAttribute title="Veröffentlicht am" text="{path: 'ReleaseDate', formatter: '.formatDate'}" />
+                    <ObjectAttribute title="DiscontinuedDate" text="{path: 'DiscontinuedDate', formatter: '.formatDate}" />
+                    <ObjectAttribute title="Kategorie" text="{path: 'Category/Name'}" />
+                    <ObjectAttribute title="Lieferant" text="{path: 'Supplier/Name'}" />
 
-                <!-- <ObjectAttribute
+                    <!-- <ObjectAttribute
                     title="{i18n>productMeasuresAttributeText}"
                     text="{DimensionWidth} {Unit}, {DimensionDepth} {Unit}, {DimensionHeight} {Unit}"/> -->
-            </attributes>
-            </ObjectHeader>       
-            <RatingIndicator id="rating" maxValue="5" value="{Rating}"/>
+                </attributes>
+            </ObjectHeader>
+            <RatingIndicator id="rating" maxValue="5" value="{Rating}" />
             <!-- <c:Fragment id="detailList" fragmentName= "qst4.view.ProductList" type="XML"/> -->
         </l:content>
     </l:VerticalLayout>
-    
 </c:FragmentDefinition>

@@ -72,7 +72,7 @@
       "": {
         "dataSource": "mainService",
         "preload": true,
-        "settings": { 
+        "settings": {
           "useBatch": false,
           "defaultBindingMode": "TwoWay"
         }
@@ -98,9 +98,16 @@
       "routes": [
         {
           "name": "RouteMain",
-          "pattern": ":?query:",
+          "pattern": "",
           "target": [
             "TargetMain"
+          ]
+        },
+        {
+          "name": "ShoppingCart",
+          "pattern": "cart",
+          "target": [
+            "TargetCart"
           ]
         }
       ],
@@ -111,6 +118,13 @@
           "clearControlAggregation": false,
           "viewId": "Main",
           "viewName": "Main"
+        },
+        "TargetCart": {
+          "viewType": "XML",
+          "transition": "flip",
+          "clearControlAggregation": false,
+          "viewId": "cartView",
+          "viewName": "Cart"
         }
       }
     },
