@@ -1,7 +1,56 @@
 <mvc:View controllerName="qst4.controller.Cart" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:l="sap.ui.layout">
     <Page id="cartView" showNavButton="true" navButtonPress="onNavBack">
         <content>
-            <Text id="detailText" text="SHOPPING CART" />
+            <Table id="idProductsTable" items="{
+                path: 'shoppingCartModel>/items',
+                sorter: {
+                    path: 'Name'
+                } }">
+                <columns>
+                    <Column id="__column0">
+                        <header>
+                            <Label text="ID" id="__label0" />
+                        </header>
+                    </Column>
+                    <Column id="__column1">
+                        <header>
+                            <Label text="Name" id="__label1" />
+                        </header>
+                    </Column>
+                    <Column id="__column2">
+                        <header>
+                            <Label text="Beschreibung" id="__label2" />
+                        </header>
+                    </Column>
+                    <Column id="__column3">
+                        <header>
+                            <Label text="Anzahl" id="__label3" />
+                        </header>
+                    </Column>
+                    <Column id="__column4">
+                        <header>
+                            <Label text="Preis" id="__label4" />
+                        </header>
+                    </Column>
+                    <Column id="__column5">
+                        <header>
+                            <Label text="Preis gesamt" id="__label5" />
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="__item0">
+                        <cells>
+                            <Text text="{shoppingCartModel>ID}" id="__text3" />
+                            <Text text="{shoppingCartModel>Name}" id="__text4" />
+                            <Text text="{shoppingCartModel>Description}" id="__text5" />
+                            <Text text="{shoppingCartModel>Number}" id="__text6" />
+                            <Text text="{shoppingCartModel>Price}" id="__text7" />
+                            <Text text="{shoppingCartModel>PriceAll}" id="__text8" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
         </content>
     </Page>
 </mvc:View>

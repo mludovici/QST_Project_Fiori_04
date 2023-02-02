@@ -22,9 +22,15 @@ sap.ui.define(
         var oModel = this._oParent.getOwnerComponent().getModel();
         //var sIndex = sPath.substr(sPath.lastIndexOf("/") + 1);
 
+        var oModel = this._oParent.getOwnerComponent().getModel();
+
+
         oModel.read(sPath, {
           success: function (oData) {
+
             this._oCurrentItemModel.setData(oData);
+            this._oCurrentItemModel.setProperty("/Number", 1);
+            this._oCurrentItemModel.setProperty("/PriceAll", oData.Price);
           }.bind(this)
         });
 
@@ -82,7 +88,7 @@ sap.ui.define(
               expand: "Supplier, Category"
             }
           });
-          debugger;
+
           //var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2].mAggregations.content[1];
           var oModel = this._oParent.getOwnerComponent().getModel();
           oModel.read(sPath + "/Supplier", {
@@ -137,7 +143,6 @@ sap.ui.define(
         return oItemsList;
       },
       onSelectFilter: function (oEvent) {
-        debugger;
         console.log(oEvent);
         let selectedIndex = oEvent.getParameter("selectedIndex");
         var oSelectedRadioButtonValue = oEvent.getSource().getAggregation("buttons")[selectedIndex].getText();
@@ -160,7 +165,7 @@ sap.ui.define(
 
         //oDropDownBox.bindElement({ path: '/' + oSelectedRadioButtonValue });
         //oDropDownBox.bindItems('/' + oSelectedRadioButtonValue);
-        //debugger;
+
       }
     });
   }

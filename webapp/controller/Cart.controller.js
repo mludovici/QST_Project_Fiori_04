@@ -11,9 +11,11 @@ sap.ui.define([
 
         return Controller.extend("qst4.controller.Cart", {
             onInit: function () {
-
+                this._oShoppingCartModel = this.getOwnerComponent().getModel("shoppingCartModel");
+                this.getView().setModel(this._oShoppingCartModel);
             },
             onNavBack: function () {
+                var data = this._oShoppingCartModel.getData();
                 var oHistory = History.getInstance();
                 var oPrevHash = oHistory.getPreviousHash();
                 if (oPrevHash !== undefined) {
@@ -25,6 +27,12 @@ sap.ui.define([
             toMain: function () {
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo("");
+            },
+            orderSummary: function () {
+                let shoppingItems = this._oShoppingCartModel.getProperty("items");
+                let sumPrice = shoppingItems.reduce((accumulator, currentValue) => accumulator + currentValue.PriceAll, 0);
+                console.log(sumPrice);
+                debugger;
             }
         });
     });

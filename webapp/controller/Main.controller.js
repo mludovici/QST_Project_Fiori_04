@@ -24,8 +24,7 @@ sap.ui.define([
             navToCart: function (oEvent) {
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo("ShoppingCart");
-            },
-
+            }
 
 
         });
