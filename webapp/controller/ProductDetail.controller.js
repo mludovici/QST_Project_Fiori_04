@@ -22,7 +22,7 @@ sap.ui.define(
 
       insertDetailList: function () {
         var oFragController = sap.ui.controller("qst4.controller.ProductList");
-        oFragController.init(this._oParent);
+        oFragController.init(this._oParent, false);
         var oFragment = sap.ui.xmlfragment("detailListFragment", "qst4.view.ProductList", oFragController);
         var oLayout = this._oParent.getView().byId("detailFragment--detailLayout");
         oLayout.insertContent(oFragment, 99);

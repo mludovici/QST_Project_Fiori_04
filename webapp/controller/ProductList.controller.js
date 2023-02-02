@@ -15,9 +15,16 @@ sap.ui.define(
       _oSupplierFilter: null,
       _bDetailAdded: false,
       init: function (oParent, isMaster) {
+        debugger;
         this._bMaster = isMaster
         this._oParent = oParent;
         this._oCurrentItemModel = this._oParent.getOwnerComponent().getModel("currentItem");
+        this._oUIModel = this._oParent.getOwnerComponent().getModel("UIModel");
+        if (!this._bMaster) {
+          this._oUIModel.setProperty("/setSuppliersNotVisible", "true")
+        } else {
+          this._oUIModel.setProperty("/setSuppliersNotVisible", "false")
+        }
       },
       onItemPressed: function (oEvent) {
         var oItem = oEvent.getSource();

@@ -1,5 +1,6 @@
 {
     "firstLoad": true,
     "filterCategorySelected": true,
-    "sumPriceShoppingCart": 0
+    "sumPriceShoppingCart": 0,
+    "setSuppliersNotVisible": "false"
 }

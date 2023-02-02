@@ -28,6 +28,7 @@
                 <Select items="{/Categories}" change="onSelectCategory" forceSelection="false" id="selectFilterDropDown">
                     <c:ListItem text="{Name}" />
                 </Select>
+                <!-- visible="{= ${UIModel>/setSuppliersNotVisible} === 'true' ? false : true} -->
                 <Select items="{/Suppliers}" change="onSelectSupplier" forceSelection="false" id="selectFilterDropDown2">
                     <c:ListItem text="{Name}" />
                 </Select>
@@ -37,7 +38,7 @@
                 <Button width="10px" id="resetFilter" icon="sap-icon://clear-filter" press="onResetFilter" />
                 <Button width="10px" id="__button1" icon="sap-icon://sort-ascending" press="onSortAsc" />
                 <Button width="10px" id="__button2" icon="sap-icon://sort-descending" press="onSortDesc" />
-            </HBox>        
+            </HBox>
         </VBox>
 
         <List id="list" items="{/Products}" class=".listStyle" width="100%">
