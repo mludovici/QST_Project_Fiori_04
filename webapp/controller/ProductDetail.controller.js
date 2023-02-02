@@ -46,16 +46,16 @@ sap.ui.define(
         onOrder: function () {
           if(!this._oDialog)
           {
-            var that = this;
               Fragment.load({
                   id: "dialog",
                   name: "qst4.view.OrderDialog", 
                   type: "XML",
                   controller: this}).then(function(oDialog){
-                      that._oDialog = oDialog;    
-                      that._oDialog.open();
-                      that._oDialog.setBindingContext(that._sCurrentPath); // /Products(0)
-                  });
+                      this._oDialog = oDialog;    
+                      this._oDialog.open();
+                      console.log("Pfad: ", this._sCurrentPath);
+                      this._oDialog.bindElement({path: this._sCurrentPath}); // /Products(0)
+                  }.bind(this));
           } else {
               this._oDialog.open();
           }
