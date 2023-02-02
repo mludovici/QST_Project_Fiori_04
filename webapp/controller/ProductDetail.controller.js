@@ -14,6 +14,11 @@ sap.ui.define(
       _sCurrentPath: null,
       init: function (oParent) {
         this._oParent = oParent;
+        this._oShoppingCartModel = this._oParent.getOwnerComponent().getModel("shoppingCartModel");//new sap.ui.model.json.JSONModel();
+        //this._oParent.getView().setModel(this._oShoppingCartModel, "cartModel");
+        // this.oShoppingCartModel.setProperty("/test", {
+        //   data: 123
+        // })
       },
       insertDetailList: function () {
         var oFragController = sap.ui.controller("qst4.controller.ProductList");
@@ -33,7 +38,7 @@ sap.ui.define(
         this._nNumber = nValue;
         var oText = this._oParent.getView().byId("detailFragment--preis");
         this._sCurrentPath = this._oParent.getView().byId("detail").getBindingContext().sPath;
-
+        debugger;
         var oModel = this._oParent.getOwnerComponent().getModel();
         oModel.read(this._sCurrentPath + "/Price", {
           success: function (oData) {
@@ -62,6 +67,29 @@ sap.ui.define(
       },
       onDialogClose: function (oEvent) {
         this._oDialog.close();
+      },
+      onCart: function (oEvent) {
+        console.log(oEvent);
+        var oItem = oEvent.getSource();
+        var sPath = oItem.getBindingContext().getPath();
+        let oModel = this._oParent.getOwnerComponent().getModel();
+        oModel.read(sPath, {
+          success: function (oData) {
+            var shoppingCartItems = this._oShoppingCartModel.getProperty("/items");
+            const isInArray = function (item) {
+              return item.ID == oData.ID
+            }
+            if (shoppingCartItems.some(isInArray)) {
+              //oData.Amount
+            }
+            debugger;
+          }.bind(this),
+          error: function (oError) {
+            console.log("Error:", oError);
+          }
+        })
+        console.log(oEvent);
+        debugger;
       }
     });
   }

@@ -26,6 +26,7 @@ sap.ui.define(
           }
         });
         var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1]; //this is shitty
+        debugger;
         var oModel = this._oParent.getOwnerComponent().getModel();
         console.log("oDetailList", oDetailList);
         oModel.read(sPath + "/Supplier", {
@@ -72,6 +73,7 @@ sap.ui.define(
               expand: "Supplier, Category"
             }
           });
+          debugger;
           //var oDetailList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[2].mAggregations.content[1];
           var oModel = this._oParent.getOwnerComponent().getModel();
           oModel.read(sPath + "/Supplier", {
@@ -121,29 +123,37 @@ sap.ui.define(
         if (this._bMaster) {
           oItemsList = this._oParent.getView().byId("masterFragment--list");
         } else {
+          //sap.ui.core.Fragment.byId(detailFragment", "detailLayout");
           oItemsList = this._oParent.getView().byId("detailFragment--detailLayout").mAggregations.content[5].mAggregations.content[1];
         }
         return oItemsList;
       },
-      // onSelectFilter: function (oEvent) {
-      //   console.log(oEvent);
-      //   let selectedIndex = oEvent.getParameter("selectedIndex");
-      //   var oSelectedRadioButtonValue = oEvent.getSource().getAggregation("buttons")[selectedIndex].getText();
+      onSelectFilter: function (oEvent) {
+        debugger;
+        console.log(oEvent);
+        let selectedIndex = oEvent.getParameter("selectedIndex");
+        var oSelectedRadioButtonValue = oEvent.getSource().getAggregation("buttons")[selectedIndex].getText();
 
-      //   var oItemsList = this.checkMasterDetailListView();
-      //   var oDropDownBox = this._oParent.getView().byId("masterFragment--selectFilterDropDown");
+        var oItemsList = this.checkMasterDetailListView();
+        var oDropDownBox = this._oParent.getView().byId("masterFragment--onSelectFilter");
 
-      //   var jsModel = new sap.ui.model.json.JSONModel({
-      //     filterPath: '/' + oSelectedRadioButtonValue
-      //   });
+        if (oSelectedRadioButtonValue == "Categories") {
+          sap.ui.core.Fragment.byId("masterFragment", "selectCategories").setVisible(true);
+          sap.ui.core.Fragment.byId("masterFragment", "selectSuppliers").setVisible(false);
+        } else {
+          sap.ui.core.Fragment.byId("masterTest", "selectSuppliers").setVisible(true);
+          sap.ui.core.Fragment.byId("masterFragment", "selectCategories").setVisible(false);
+        }
+        var jsModel = new sap.ui.model.json.JSONModel({
+          filterPath: '/' + oSelectedRadioButtonValue
+        });
 
-      //   this._oParent.byId("masterFragment--list").setModel(jsModel);
+        //this._oParent.byId("masterFragment--list").setModel(jsModel);
 
-      //   //oDropDownBox.bindElement({ path: '/' + oSelectedRadioButtonValue });
-      //   //oDropDownBox.bindItems('/' + oSelectedRadioButtonValue);
-      //   //debugger;
-      // }
-
+        //oDropDownBox.bindElement({ path: '/' + oSelectedRadioButtonValue });
+        //oDropDownBox.bindItems('/' + oSelectedRadioButtonValue);
+        //debugger;
+      }
     });
   }
 );

@@ -69,6 +69,12 @@
           "bundleName": "qst4.i18n.i18n"
         }
       },
+      "shoppingCartModel": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "preload": false,
+        "uri": "model/shoppingCartModel.json"
+      },
       "": {
         "dataSource": "mainService",
         "preload": true,

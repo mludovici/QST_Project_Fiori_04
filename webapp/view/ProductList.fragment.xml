@@ -1,5 +1,5 @@
 <c:FragmentDefinition xmlns:c="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout">
-    <l:VerticalLayout width="100%">
+    <l:VerticalLayout width="100%" id="masterTest">
         <!-- <HBox>
             <VBox>
                 <Text text="Choose Category" />
@@ -31,10 +31,10 @@
             </RadioButtonGroup>
         </VBox>
         <HBox justifyContent="Start">
-            <Select items="{/Categories}" change="onSelectCategory" forceSelection="false" id="selectFilterDropDown">
+            <Select items="{/Categories}" change="onSelectCategory" forceSelection="false" id="selectCategories">
                 <c:ListItem text="{Name}" />
             </Select>
-            <Select items="{/Suppliers}" change="onSelectSupplier" forceSelection="false">
+            <Select items="{/Suppliers}" change="onSelectSupplier" forceSelection="false" id="selectSuppliers" visible="false">
                 <c:ListItem text="{Name}" />
             </Select>
             <HBox>
