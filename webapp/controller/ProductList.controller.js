@@ -11,6 +11,7 @@ sap.ui.define(
       _oParent: null,
       _bMaster: null,
       _oCurrentItemModel: null,
+      _oDetailFilter: null,
       _oCategoryFilter: null,
       _oSupplierFilter: null,
       _bDetailAdded: false,
@@ -69,13 +70,16 @@ sap.ui.define(
         oModel.read(sPath + "/Supplier", {
           success: function (oData) {
             var sSupplier = oData.Name;
-            var oFilter = new sap.ui.model.Filter(
+            this._oDetailFilter = new sap.ui.model.Filter(
               "Supplier/Name",
               sap.ui.model.FilterOperator.EQ,
               sSupplier
             );
-            oDetailList.getBinding("items").filter([oFilter]);
-          }
+            console.log("Detail Filter wird gesetzt!", this._oDetailFilter);
+            this._oParent.getOwnerComponent().getModel("UIModel").setProperty("/DetailFilter", this._oDetailFilter);
+
+            oDetailList.getBinding("items").filter([this._oDetailFilter]);
+          }.bind(this)
         });
       },
       /*onSelectCategory: function (oEvent) {
@@ -185,7 +189,8 @@ sap.ui.define(
       },
       onSelectCategory: function (oEvent) {
         var oModel = this._oParent.getOwnerComponent().getModel();
-        var oItemsList = this.checkMasterDetailListView();
+        var oItemsList = this.checkMasterDetailListView();        
+        this._oDetailFilter =  this._oParent.getOwnerComponent().getModel("UIModel").getProperty("/DetailFilter");
 
         var sSelectedCategory = oEvent.getParameter("selectedItem").getText();
         this._oCategoryFilter = new sap.ui.model.Filter(
@@ -194,25 +199,42 @@ sap.ui.define(
           sSelectedCategory
         );
         if (this._oSupplierFilter != null) {
-          oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter]);
+          if(this._bMaster){
+            oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter]);
+          } else {            
+            oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter, this._oDetailFilter]);
+          }
         } else {
-          oItemsList.getBinding("items").filter([this._oCategoryFilter]);
+          if(this._bMaster){
+            oItemsList.getBinding("items").filter([this._oCategoryFilter]);
+          } else {            
+            oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oDetailFilter]);
+          }
         }
       },
       onSelectSupplier: function (oEvent) {
         var oModel = this._oParent.getOwnerComponent().getModel();
         var oItemsList = this.checkMasterDetailListView();
+        this._oDetailFilter =  this._oParent.getOwnerComponent().getModel("UIModel").getProperty("/DetailFilter");
 
         var sSelectedSupplier = oEvent.getParameter("selectedItem").getText();
         this._oSupplierFilter = new sap.ui.model.Filter(
           "Supplier/Name",
           sap.ui.model.FilterOperator.EQ,
           sSelectedSupplier
-        );
+        );        
         if (this._oCategoryFilter != null) {
-          oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter]);
+          if(this._bMaster){
+            oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter]);
+          } else {            
+            oItemsList.getBinding("items").filter([this._oCategoryFilter, this._oSupplierFilter, this._oDetailFilter]);
+          }
         } else {
-          oItemsList.getBinding("items").filter([this._oSupplierFilter]);
+          if(this._bMaster){
+            oItemsList.getBinding("items").filter([this._oSupplierFilter]);
+          } else {            
+            oItemsList.getBinding("items").filter([this._oSupplierFilter, this._oDetailFilter]);
+          }
         }
       },
       onResetFilter: function () {
