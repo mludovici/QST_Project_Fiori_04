@@ -31,7 +31,7 @@ sap.ui.define(
             this._oCurrentItemModel.setProperty("/Number", "1");
           }.bind(this)
         });
-        if(!this._bDetailAdded) {
+        if(!this._bDetailAdded && this._bMaster) {
           console.log("Add");
           var oFragController = sap.ui.controller("qst4.controller.ProductDetail");
           oFragController.init(this._oParent);
